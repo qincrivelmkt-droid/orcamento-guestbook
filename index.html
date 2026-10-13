@@ -136,6 +136,39 @@ input:focus,textarea:focus,select:focus{border-color:var(--tinta)}
 .steps-grid{position:absolute;left:68px;right:68px;display:grid;grid-template-columns:1fr 1fr;gap:24px 28px}
 .steps-grid .step-box{border-top:2px solid var(--p-ac2);padding-top:10px}
 .highlight-box{background:var(--p-card);border-left:3px solid var(--p-ac2);padding:14px 16px;font-family:Helvetica,Arial,sans-serif;font-size:11.5px;color:#45413a;line-height:1.6}
+.pola{background:#fff;padding:10px 10px 34px;box-shadow:0 8px 18px -8px rgba(40,30,20,.45);flex:none}
+.pola .img{border-radius:0}
+.polas{display:flex;justify-content:center;gap:26px;margin-top:52px}
+.passos3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.passos3>div{border-top:2px solid var(--p-ac2);padding-top:10px}
+.passos3 .step-num{display:block;margin:0 0 4px}
+.passos3 .step-title{display:block;font-size:14px}
+.depo1{margin-top:48px;font-family:Georgia,serif;font-style:italic;font-size:14px;color:#4a463f;text-align:center;line-height:1.5}
+.depo1 span{display:block;font-style:normal;font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--p-ac);margin-top:6px}
+.fluxo{position:absolute;left:68px;right:68px;top:64px;bottom:92px;display:flex;flex-direction:column;justify-content:center}
+.cards{display:grid;gap:16px;align-items:stretch}
+.card{position:relative;background:var(--p-card);border:1px solid var(--p-li);border-radius:4px;padding:26px 20px 20px;display:flex;flex-direction:column}
+.card.fav-card{border:1.5px solid var(--p-ac2);box-shadow:0 14px 30px -18px rgba(40,30,20,.5)}
+.card .pkg-tag{margin:0 0 6px;font-size:9.5px}
+.card-nome{font-size:24px;line-height:1.15;font-weight:normal;margin:0 0 10px;text-transform:uppercase;letter-spacing:.5px}
+.card-desc{font-family:Helvetica,Arial,sans-serif;font-size:12px;line-height:1.55;color:#4a463f;margin:0 0 12px}
+.card .pkg-list{font-size:12px;flex:1;margin-bottom:6px}
+.card .pkg-list li{padding:5px 0 5px 12px}
+.card-preco{border-top:1px solid var(--p-li);margin-top:14px;padding-top:14px;text-align:center}
+.card-preco .label{font-family:Helvetica,Arial,sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--p-ac);font-style:italic}
+.card-preco .amount{font-size:34px;margin:4px 0 2px}
+.card-preco .amount .rs{font-size:13px;vertical-align:super;margin-right:3px}
+.card-preco .installments{font-family:Helvetica,Arial,sans-serif;font-size:11px;color:#4a463f;font-style:italic}
+.nota-validade{margin-top:10px;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:1px;color:var(--p-ac);text-transform:uppercase}
+.conds{list-style:none;margin:10px 0 0;padding:0;font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#33302a;display:grid;gap:8px}
+.conds li{padding-left:14px;position:relative;line-height:1.5}
+.conds li:before{content:"-";position:absolute;left:0;color:var(--p-ac2)}
+.conds b{color:#1c1a17}
+.obs{font-family:Helvetica,Arial,sans-serif;font-size:10.8px;line-height:1.6;color:#5a554c;margin:8px 0 0;white-space:pre-line}
+.contato{margin-top:46px;display:flex;align-items:center;gap:34px;border-top:1px solid var(--p-li);padding-top:28px}
+.contato-tit{font-size:22px;font-weight:normal;line-height:1.25;margin:0 0 12px}
+.contato p{font-size:13.5px;margin:0 0 6px}
+.contato p span{display:inline-block;width:86px;font-family:Helvetica,Arial,sans-serif;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--p-ac)}
 .add-table{width:100%;border-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:12.5px}
 .add-table td{padding:14px 4px;border-bottom:1px solid var(--p-li);color:#33302a}
 .add-table td.v{text-align:right;font-family:Georgia,serif;font-size:16px;color:#1c1a17;white-space:nowrap}
@@ -198,9 +231,8 @@ input:focus,textarea:focus,select:focus{border-color:var(--tinta)}
         <label class="campo">Frase da capa<input type="text" id="t_frase"></label>
         <label class="campo">Título da apresentação<small>Use *asteriscos* para destacar uma parte em itálico.</small><input type="text" id="t_titulo"></label>
         <label class="campo">Texto da apresentação<textarea id="t_texto" style="min-height:130px"></textarea></label>
-        <label class="campo">Depoimentos (opcional)<small>Um por linha, no formato: texto | nome. Em branco, a página não aparece.</small><textarea id="t_depo"></textarea></label>
+        <label class="campo">Depoimento (opcional)<small>Formato: texto | nome. Aparece na página 2.</small><textarea id="t_depo"></textarea></label>
         <label class="campo">Observações<textarea id="t_obs" style="min-height:120px"></textarea></label>
-        <label class="check"><input type="checkbox" id="t_exp"> Incluir a página "A experiência"</label>
       </div>
     </details>
 
@@ -257,9 +289,9 @@ var PADRAO = {
   textos: {
     frase: 'Enquanto o fotógrafo registra o casal, nós registramos o carinho de cada convidado.',
     titulo: 'O casamento passa em um dia. A *memória dele* pode durar a vida inteira.',
-    texto: 'Existe uma foto no casamento que ninguém mais tira. Não é a do primeiro beijo, nem a da entrada da noiva. É a foto da tia que veio de longe, do padrinho que emocionou, do amigo de infância que só se reencontra em ocasiões como essa.\n\nÉ essa foto que o nosso trabalho existe para registrar. Uma a uma, com o convidado ainda dentro da festa e a emoção fresca, e com uma mensagem escrita à mão ao lado.\n\nNo fim da noite, tudo isso vira um álbum físico, entregue nas mãos de vocês.',
+    texto: 'Existe uma foto no casamento que ninguém mais tira: a da tia que veio de longe, do padrinho que emocionou, do amigo de infância. É essa foto que o nosso trabalho registra, uma a uma, com uma mensagem escrita à mão ao lado, para vocês guardarem para sempre.',
     depo: '',
-    obs: 'O deslocamento para eventos fora da nossa cidade é calculado e informado com transparência antes de fecharmos qualquer detalhe.\n\nO filme instantâneo é um processo analógico: variações sutis de cor e luminosidade são normais e fazem parte do charme da experiência. Cada foto é única.\n\nO tempo de cobertura vai até a finalização do pacote contratado, para que nenhum momento especial seja perdido.',
+    obs: 'Deslocamento fora da nossa cidade é informado antes de fecharmos. O filme instantâneo é analógico: pequenas variações de cor fazem parte do charme, e cada foto é única.',
     exp: true
   },
   noiva: { casal: '', data: '', local: '' }
@@ -297,8 +329,6 @@ Object.keys(LIGA).forEach(function (id) {
   el.value = est[k[0]][k[1]] == null ? '' : est[k[0]][k[1]];
   el.addEventListener('input', function () { est[k[0]][k[1]] = el.value; salvar(); if (id === 'e_vfoto') desenhaPacotes(); render(); });
 });
-$('t_exp').checked = !!est.textos.exp;
-$('t_exp').addEventListener('change', function () { est.textos.exp = this.checked; salvar(); render(); });
 
 /* cores */
 Object.keys(CORES).forEach(function (k) {
@@ -420,15 +450,18 @@ $('add-adic').addEventListener('click', function () { est.adicionais.push({ nome
 /* ---------- montagem das folhas ---------- */
 function rodape(nPag) {
   var nome = est.empresa.nome || 'Sua empresa';
-  return '<div class="footer-tag">' + esc(nome) + ' · Guestbook de fotos instantâneas</div><div class="page-num">Página ' + String(nPag).padStart(2, '0') + '</div>';
+  return '<div class="footer-tag">' + esc(nome) + ' · Guestbook de fotos instantâneas</div><div class="page-num">' + String(nPag).padStart(2, '0') + '</div>';
+}
+function polaroid(src, giro, w) {
+  return '<div class="pola" style="width:' + w + 'px;transform:rotate(' + giro + 'deg)">' + imgDiv(src, '', 'width:100%;aspect-ratio:1') + '</div>';
 }
 function montaPaginas() {
   var e = est.empresa, t = est.textos, c = est.cond, n = est.noiva;
   var nome = e.nome || 'Sua empresa';
-  var paginas = [], secao = 1, idx = 1;
   var assin = e.assin || ('com carinho, ' + nome);
+  var paginas = [];
 
-  // capa
+  // 1. capa
   paginas.push(
     '<div class="cover-photo" style="' + (foto(0) ? "background-image:url('" + foto(0) + "')" : '') + '"></div><div class="cover-overlay"></div>' +
     '<div class="corner tc" style="border-color:#e9dcc4"></div><div class="corner tr" style="border-color:#e9dcc4"></div><div class="corner bl" style="border-color:#e9dcc4"></div><div class="corner br" style="border-color:#e9dcc4"></div>' +
@@ -437,99 +470,64 @@ function montaPaginas() {
     (t.frase ? '<p class="cover-quote">&ldquo;' + esc(t.frase) + '&rdquo;</p>' : '') + '</div>' +
     '<div class="cover-footer">' + esc(nome) + (e.cidade ? ' · ' + esc(e.cidade) : '') + '</div>'
   );
-  // apresentação
+
+  // 2. sobre + como funciona + fotos em polaroid
+  var depo = String(t.depo || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean)[0];
+  var dp = depo ? depo.split('|') : null;
+  var nf = Math.max(0, Math.min(3, est.fotos.length - 1));
+  var fotosP2 = [1, 2, 3].slice(0, nf || 3).map(function (k, i) { return polaroid(foto(k), [-4, 2.5, -2][i], 190); }).join('');
   paginas.push(
-    '<div class="pad" style="top:76px"><div class="kicker">' + String(secao++).padStart(2, '0') + ' · Nossa palavra</div></div>' +
-    '<div class="split"><div class="colA"><span style="display:block;font-style:italic;color:var(--p-ac);font-size:13px;margin-bottom:6px">Antes de qualquer preço</span>' +
-    '<h1 class="title">' + destaque(t.titulo) + '</h1><p class="body-text">' + esc(t.texto) + '</p><p class="signature">' + esc(assin) + '</p></div>' +
-    '<div class="colB">' + imgDiv(foto(1)) + '</div></div>'
+    '<div class="fluxo"><div class="kicker">Sobre nós</div>' +
+    '<h1 class="title" style="font-size:31px;max-width:600px">' + destaque(t.titulo) + '</h1>' +
+    '<p class="body-text" style="max-width:640px">' + esc(t.texto) + '</p><p class="signature">' + esc(assin) + '</p>' +
+    '<div class="kicker" style="margin:46px 0 14px">Como funciona</div><div class="passos3">' +
+    '<div><div class="step-num">01</div><div class="step-title">A foto na hora</div><p class="step-desc">Cada convidado tira a sua foto instantânea, com a nossa equipe orientando.</p></div>' +
+    '<div><div class="step-num">02</div><div class="step-title">Um recado especial</div><p class="step-desc">Ao lado da foto, o convidado deixa uma mensagem escrita à mão para vocês.</p></div>' +
+    '<div><div class="step-num">03</div><div class="step-title">Memórias para sempre</div><p class="step-desc">No álbum, nas lembranças dos convidados ou nos dois, conforme o pacote.</p></div>' +
+    '</div>' +
+    '<div class="polas">' + fotosP2 + '</div>' +
+    (dp ? '<div class="depo1">&ldquo;' + esc(dp[0].trim()) + '&rdquo;' + (dp[1] ? '<span>' + esc(dp[1].trim()) + '</span>' : '') + '</div>' : '') + '</div>'
   );
-  // experiência
-  if (t.exp) {
-    paginas.push(
-      '<div class="pad" style="top:76px"><div class="kicker">' + String(secao++).padStart(2, '0') + ' · A experiência</div>' +
-      '<h1 class="title" style="font-size:28px">Três momentos, uma <span class="acc">memória inesquecível</span></h1><p class="body-text" style="font-style:italic">Simples para os convidados. Emocionante para vocês.</p></div>' +
-      '<div class="pad" style="top:250px">' +
-      '<div class="step"><span class="step-num">01</span><span class="step-title">Cada convidado tira sua foto</span><p class="step-desc">A nossa equipe fica junto do stand, orientando com leveza. A foto instantânea revela na hora, enquanto a festa acontece.</p></div><hr class="rule-full">' +
-      '<div class="step" style="margin-top:14px"><span class="step-num">02</span><span class="step-title">Deixa uma mensagem para vocês</span><p class="step-desc">Ao lado da foto, cada convidado escreve um recado à mão. Um voto, uma memória, um carinho, com a letra de quem ama vocês.</p></div><hr class="rule-full">' +
-      '<div class="step" style="margin-top:14px"><span class="step-num">03</span><span class="step-title">Vocês recebem as memórias</span><p class="step-desc">No álbum, nas lembranças dos convidados ou nos dois, conforme o pacote escolhido. Para abrir e reviver sempre.</p></div></div>' +
-      '<div class="photo-strip">' + imgDiv(foto(2)) + imgDiv(foto(3)) + imgDiv(foto(4)) + '</div>'
-    );
-  }
-  // depoimentos
-  var depo = String(t.depo || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean).slice(0, 4);
-  if (depo.length) {
-    paginas.push(
-      '<div class="pad" style="top:76px"><div class="kicker">' + String(secao++).padStart(2, '0') + ' · Quem viveu, sentiu</div>' +
-      '<h1 class="title" style="font-size:28px">Palavras <span class="acc">reais</span></h1></div>' +
-      '<div class="pad" style="top:210px">' + depo.map(function (l) {
-        var p = l.split('|'); return '<div class="quote-card"><p>&ldquo;' + esc(p[0].trim()) + '&rdquo;</p>' + (p[1] ? '<span class="who">' + esc(p[1].trim()) + '</span>' : '') + '</div>';
-      }).join('') + '</div>'
-    );
-  }
-  // pacotes
-  var secPac = String(secao++).padStart(2, '0');
-  est.pacotes.forEach(function (p, i) {
-    if (!p.ativo) return;
+
+  // 3. pacotes lado a lado
+  var ativos = est.pacotes.filter(function (p) { return p.ativo; });
+  var cards = ativos.map(function (p) {
     var itens = [];
-    if (num(p.album) > 0) itens.push(num(p.album) + ' fotos instantâneas para o álbum');
+    if (num(p.album) > 0) itens.push(num(p.album) + ' fotos para o álbum');
     if (num(p.lembranca) > 0) itens.push(num(p.lembranca) + ' fotos lembrança para os convidados');
-    if (num(p.prof) > 0) itens.push(num(p.prof) + (num(p.prof) === 1 ? ' profissional conduzindo' : ' profissionais conduzindo') + ' a experiência');
+    if (num(p.prof) > 0) itens.push(num(p.prof) + (num(p.prof) === 1 ? ' profissional' : ' profissionais'));
+    if (num(p.horas) > 0) itens.push(num(p.horas) + (num(p.horas) === 1 ? ' hora' : ' horas') + ' de cobertura');
     String(p.itens || '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean).forEach(function (l) { itens.push(l); });
-    if (num(p.horas) > 0) itens.push(num(p.horas) + (num(p.horas) === 1 ? ' hora' : ' horas') + ' de cobertura ou até finalizar o pacote');
     var valor = precoFinal(p);
-    paginas.push(
-      '<div class="pad" style="top:76px;right:300px"><div class="kicker">' + secPac + ' · Pacotes</div>' +
-      (p.tag ? '<p class="pkg-tag">' + esc(p.tag) + '</p>' : '') + '<h1 class="pkg-name">' + esc(p.nome || 'Pacote') + '</h1>' +
-      (p.desc ? '<p class="pkg-desc">' + esc(p.desc) + '</p>' : '') +
-      '<p class="pkg-list-title">O que está incluído</p><ul class="pkg-list">' + itens.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' +
-      '<div class="price-box">' + (p.fav ? '<div class="fav">FAVORITO</div>' : '') + '<div class="label">Investimento</div>' +
-      '<div class="amount"><span class="rs">R$</span>' + (valor > 0 ? reais(valor) : '--') + '</div>' +
-      (num(c.parc) > 1 ? '<div class="installments">ou em até ' + num(c.parc) + 'x no cartão</div>' : '') +
-      '<div class="valid">Válido por ' + (num(c.valid) || 10) + ' dias<br>a partir do envio</div></div>' +
-      imgDiv(foto(i + 2), 'pkg-photo')
-    );
-  });
-  // adicionais
-  var adic = est.adicionais.filter(function (a) { return (a.nome || '').trim(); });
-  if (adic.length) {
-    paginas.push(
-      '<div class="pad" style="top:76px"><div class="kicker">' + String(secao++).padStart(2, '0') + ' · Adicionais</div>' +
-      '<h1 class="title" style="font-size:28px">Para deixar o dia <span class="acc">ainda mais especial</span></h1>' +
-      '<p class="body-text">Itens opcionais, que podem ser somados a qualquer pacote.</p></div>' +
-      '<div class="pad" style="top:250px"><table class="add-table">' + adic.map(function (a) {
-        return '<tr><td>' + esc(a.nome) + '</td><td class="v">' + (num(a.preco) > 0 ? 'R$ ' + reais(num(a.preco)) : 'sob consulta') + '</td></tr>';
-      }).join('') + '</table></div>'
-    );
-  }
-  // reserva
+    return '<div class="card' + (p.fav ? ' fav-card' : '') + '">' + (p.fav ? '<div class="fav">FAVORITO</div>' : '') +
+      (p.tag ? '<p class="pkg-tag">' + esc(p.tag) + '</p>' : '') + '<h2 class="card-nome">' + esc(p.nome || 'Pacote') + '</h2>' +
+      (p.desc ? '<p class="card-desc">' + esc(p.desc) + '</p>' : '') +
+      '<ul class="pkg-list">' + itens.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+      '<div class="card-preco"><div class="label">Investimento</div><div class="amount"><span class="rs">R$</span>' + (valor > 0 ? reais(valor) : '--') + '</div>' +
+      (num(c.parc) > 1 ? '<div class="installments">ou em até ' + num(c.parc) + 'x no cartão</div>' : '') + '</div></div>';
+  }).join('');
   paginas.push(
-    '<div class="pad" style="top:76px"><div class="kicker">' + String(secao++).padStart(2, '0') + ' · Reserva</div>' +
-    '<h1 class="title" style="font-size:28px">Um processo <span class="acc">simples e seguro</span></h1>' +
-    '<p class="body-text" style="max-width:490px">A data é reservada após a assinatura do contrato e o pagamento do sinal. A partir daí, seguimos juntos no planejamento.</p></div>' +
-    '<div class="steps-grid" style="top:250px">' +
-    '<div class="step-box"><div class="step-num" style="display:block">01</div><div class="step-title">Reserva da data</div><p class="step-desc">' + (num(c.sinal) || 30) + '% do valor do pacote na assinatura do contrato.</p></div>' +
-    '<div class="step-box"><div class="step-num" style="display:block">02</div><div class="step-title">Saldo restante</div><p class="step-desc">Pago até uma semana antes do evento.</p></div>' +
-    (num(c.pix) > 0 ? '<div class="step-box"><div class="step-num" style="display:block">03</div><div class="step-title">Pagamento à vista</div><p class="step-desc">' + num(c.pix) + '% de desconto para pagamento integral via Pix.</p></div>' : '') +
-    (num(c.parc) > 1 ? '<div class="step-box"><div class="step-num" style="display:block">' + (num(c.pix) > 0 ? '04' : '03') + '</div><div class="step-title">Cartão de crédito</div><p class="step-desc">Parcelamento em até ' + num(c.parc) + ' vezes, com juros da operadora.</p></div>' : '') +
-    '</div><div class="pad highlight-box" style="top:640px">A data é confirmada por ordem de assinatura do contrato. Recomendamos reservar com antecedência.</div>'
+    '<div class="fluxo" style="left:52px;right:52px"><div class="kicker" style="margin-left:16px">Pacotes</div>' +
+    '<h1 class="title" style="font-size:31px;margin-left:16px;margin-bottom:26px">Escolha a <span class="acc">experiência</span> de vocês</h1>' +
+    '<div class="cards" style="grid-template-columns:repeat(' + Math.max(1, Math.min(3, ativos.length)) + ',1fr)">' + (cards || '<p class="body-text">Ative pelo menos um pacote.</p>') +
+    '<div class="nota-validade" style="grid-column:1 / -1">Proposta válida por ' + (num(c.valid) || 10) + ' dias a partir do envio.</div></div></div>'
   );
-  // observações
-  if ((t.obs || '').trim()) {
-    paginas.push(
-      '<div class="pad" style="top:76px"><div class="kicker">Observações importantes</div>' +
-      '<h1 class="title" style="font-size:28px">Detalhes que valem <span class="acc">a pena saber</span></h1><p class="body-text">' + esc(t.obs) + '</p></div>'
-    );
-  }
-  // contato
+
+  // 4. adicionais + pagamento + observações + contato
+  var adic = est.adicionais.filter(function (a) { return (a.nome || '').trim(); });
+  var conds = ['<li><b>' + (num(c.sinal) || 30) + '% de sinal</b> na assinatura do contrato, para reservar a data</li>', '<li><b>Saldo</b> até uma semana antes do evento</li>'];
+  if (num(c.pix) > 0) conds.push('<li><b>' + num(c.pix) + '% de desconto</b> no pagamento à vista via Pix</li>');
+  if (num(c.parc) > 1) conds.push('<li><b>Até ' + num(c.parc) + 'x no cartão</b>, com juros da operadora</li>');
   paginas.push(
-    imgDiv(foto(est.fotos.length > 1 ? est.fotos.length - 1 : 0), '', 'position:absolute;top:220px;left:50%;transform:translateX(-50%);width:340px;height:340px') +
-    '<div class="pad" style="top:620px;text-align:center"><h1 class="title" style="font-size:26px">Será uma alegria fazer parte<br><span class="acc">do dia mais importante</span> de vocês</h1>' +
-    '<div class="cover-line"></div>' +
-    (e.whats ? '<p class="sans" style="font-size:11px;letter-spacing:1px;color:var(--p-ac);margin:4px 0">WHATSAPP</p><p style="font-size:14px;margin:0 0 10px">' + esc(e.whats) + '</p>' : '') +
-    (e.insta ? '<p class="sans" style="font-size:11px;letter-spacing:1px;color:var(--p-ac);margin:4px 0">INSTAGRAM</p><p style="font-size:14px;margin:0 0 10px">' + esc(e.insta) + '</p>' : '') +
-    (e.cidade ? '<p class="sans" style="font-size:11px;letter-spacing:1px;color:var(--p-ac);margin:4px 0">LOCALIZAÇÃO</p><p style="font-size:14px;margin:0 0 16px">' + esc(e.cidade) + '</p>' : '') +
-    '<p class="signature">' + esc(assin) + '</p></div>'
+    '<div class="fluxo">' +
+    (adic.length ? '<div class="kicker">Adicionais</div><p class="body-text" style="margin:6px 0 4px">Itens opcionais, que podem ser somados a qualquer pacote.</p>' +
+      '<table class="add-table">' + adic.map(function (a) { return '<tr><td>' + esc(a.nome) + '</td><td class="v">' + (num(a.preco) > 0 ? 'R$ ' + reais(num(a.preco)) : 'sob consulta') + '</td></tr>'; }).join('') + '</table>' : '') +
+    '<div class="kicker" style="margin-top:' + (adic.length ? 34 : 0) + 'px">Pagamento e reserva</div><ul class="conds">' + conds.join('') + '</ul>' +
+    ((t.obs || '').trim() ? '<div class="kicker" style="margin-top:30px">Observações</div><p class="obs">' + esc(t.obs) + '</p>' : '') +
+    '<div class="contato">' + polaroid(foto(est.fotos.length > 1 ? est.fotos.length - 1 : 0), -3, 150) +
+    '<div><h2 class="contato-tit">Será uma alegria fazer parte <span class="acc">desse dia</span></h2>' +
+    (e.whats ? '<p><span>WhatsApp</span>' + esc(e.whats) + '</p>' : '') + (e.insta ? '<p><span>Instagram</span>' + esc(e.insta) + '</p>' : '') +
+    (e.cidade ? '<p><span>Local</span>' + esc(e.cidade) + '</p>' : '') + '<p class="signature" style="margin-top:12px">' + esc(assin) + '</p></div></div></div>'
   );
   return paginas.map(function (html, i) { return i === 0 ? html : html + rodape(i + 1); });
 }
